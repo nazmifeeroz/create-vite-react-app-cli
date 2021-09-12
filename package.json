@@ -1,6 +1,6 @@
 {
   "name": "create-vite-react-app-cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Create a React App with ViteJS!",
   "main": "index.js",
   "author": "Nazmi Feeroz",
@@ -23,6 +23,7 @@
   "homepage": "https://github.com/nazmifeeroz/create-vite-react-app-cli#readme",
   "devDependencies": {
     "@types/ejs": "^3.1.0",
+    "@types/figlet": "^1.5.4",
     "@types/inquirer": "^8.1.1",
     "@types/node": "^16.9.1",
     "@types/shelljs": "^0.8.9",
@@ -33,6 +34,7 @@
   "dependencies": {
     "chalk": "^4.1.2",
     "ejs": "^3.1.6",
+    "figlet": "^1.5.2",
     "inquirer": "^8.1.2",
     "shelljs": "^0.8.4"
   }

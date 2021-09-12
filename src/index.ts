@@ -3,9 +3,33 @@
 import * as fs from "fs";
 import * as path from "path";
 import * as inquirer from "inquirer";
-import { red } from "chalk";
+import { red, dim } from "chalk";
 import * as shell from "shelljs";
+import figlet from "figlet";
 import * as template from "./utils/template";
+
+const withTitle = (cli: () => {}) =>
+  figlet("Vite React App", function (err, data) {
+    if (err) {
+      console.log("Something went wrong...");
+      console.dir(err);
+      return;
+    }
+    console.clear();
+    console.log(data);
+    console.log(
+      dim(
+        "\nReact template configured with ViteJS, Typescript, Eslint/Prettier and React Testing Library."
+      )
+    );
+    console.log(
+      dim(
+        "Template can be found at https://github.com/nazmifeeroz/vite-reactts-eslint-prettier\n"
+      )
+    );
+
+    cli();
+  });
 
 const QUESTIONS = [
   {
@@ -31,28 +55,30 @@ export interface CliOptions {
 
 const CURR_DIR = process.cwd();
 
-inquirer.prompt(QUESTIONS).then((answers) => {
-  const projectChoice = "react-template";
-  const projectName = answers["name"];
-  const templatePath = path.join(__dirname, "templates", projectChoice);
-  const tartgetPath = path.join(CURR_DIR, projectName);
+withTitle(() =>
+  inquirer.prompt(QUESTIONS).then((answers) => {
+    const projectChoice = "react-template";
+    const projectName = answers["name"];
+    const templatePath = path.join(__dirname, "templates", projectChoice);
+    const tartgetPath = path.join(CURR_DIR, projectName);
 
-  const options: CliOptions = {
-    projectName,
-    templateName: projectChoice,
-    templatePath,
-    tartgetPath,
-    packageManagerChoice: answers["packageManagerChoice"],
-  };
+    const options: CliOptions = {
+      projectName,
+      templateName: projectChoice,
+      templatePath,
+      tartgetPath,
+      packageManagerChoice: answers["packageManagerChoice"],
+    };
 
-  if (!createProject(options.tartgetPath)) {
-    return;
-  }
+    if (!createProject(options.tartgetPath)) {
+      return;
+    }
 
-  createDirectoryContents(options.templatePath, options.projectName);
+    createDirectoryContents(options.templatePath, options.projectName);
 
-  postProcess(options);
-});
+    postProcess(options);
+  })
+);
 
 function createProject(projectPath: string) {
   if (fs.existsSync(projectPath)) {
@@ -107,6 +133,9 @@ function postProcess(options: CliOptions) {
     const installCommand = `${options.packageManagerChoice} ${
       options.packageManagerChoice === "npm" ? "install" : ""
     }`;
+
+    console.log(dim(`\nRunning ${installCommand}...`));
+
     const result = shell.exec(installCommand, { silent: false });
     if (result.code !== 0) {
       return false;

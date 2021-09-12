@@ -19,13 +19,29 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = __importStar(require("fs"));
 const path = __importStar(require("path"));
 const inquirer = __importStar(require("inquirer"));
 const chalk_1 = require("chalk");
 const shell = __importStar(require("shelljs"));
+const figlet_1 = __importDefault(require("figlet"));
 const template = __importStar(require("./utils/template"));
+const withTitle = (cli) => (0, figlet_1.default)("Vite React App", function (err, data) {
+    if (err) {
+        console.log("Something went wrong...");
+        console.dir(err);
+        return;
+    }
+    console.clear();
+    console.log(data);
+    console.log((0, chalk_1.dim)("\nReact template configured with ViteJS, Typescript, Eslint/Prettier and React Testing Library."));
+    console.log((0, chalk_1.dim)("Template can be found at https://github.com/nazmifeeroz/vite-reactts-eslint-prettier\n"));
+    cli();
+});
 const QUESTIONS = [
     {
         name: "name",
@@ -40,7 +56,7 @@ const QUESTIONS = [
     },
 ];
 const CURR_DIR = process.cwd();
-inquirer.prompt(QUESTIONS).then((answers) => {
+withTitle(() => inquirer.prompt(QUESTIONS).then((answers) => {
     const projectChoice = "react-template";
     const projectName = answers["name"];
     const templatePath = path.join(__dirname, "templates", projectChoice);
@@ -57,7 +73,7 @@ inquirer.prompt(QUESTIONS).then((answers) => {
     }
     createDirectoryContents(options.templatePath, options.projectName);
     postProcess(options);
-});
+}));
 function createProject(projectPath) {
     if (fs.existsSync(projectPath)) {
         console.log((0, chalk_1.red)(`Folder ${projectPath} exists. Delete or use another name.`));
@@ -99,6 +115,7 @@ function postProcess(options) {
     if (isNode) {
         shell.cd(options.tartgetPath);
         const installCommand = `${options.packageManagerChoice} ${options.packageManagerChoice === "npm" ? "install" : ""}`;
+        console.log((0, chalk_1.dim)(`\nRunning ${installCommand}...`));
         const result = shell.exec(installCommand, { silent: false });
         if (result.code !== 0) {
             return false;
