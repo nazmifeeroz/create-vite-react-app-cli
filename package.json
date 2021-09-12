@@ -1,12 +1,12 @@
 {
-  "name": "create-vite-react-app",
+  "name": "create-vite-react-app-cli",
   "version": "0.1.0",
   "description": "Create a React App with ViteJS!",
   "main": "index.js",
   "author": "Nazmi Feeroz",
   "license": "MIT",
   "bin": {
-    "create-vite-react-app": "./dist/index.js"
+    "create-vite-react-app-cli": "./dist/index.js"
   },
   "scripts": {
     "start": "ts-node src/index.ts",
@@ -14,12 +14,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nazmifeeroz/create-vite-react-app.git"
+    "url": "git+https://github.com/nazmifeeroz/create-vite-react-app-cli.git"
   },
   "bugs": {
-    "url": "https://github.com/nazmifeeroz/create-vite-react-app/issues"
+    "url": "https://github.com/nazmifeeroz/create-vite-react-app-cli/issues"
   },
-  "homepage": "https://github.com/nazmifeeroz/create-vite-react-app#readme",
+  "homepage": "https://github.com/nazmifeeroz/create-vite-react-app-cli#readme",
   "devDependencies": {
     "@types/ejs": "^3.1.0",
     "@types/inquirer": "^8.1.1",
