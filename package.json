@@ -1,6 +1,6 @@
 {
   "name": "create-vite-react-app-cli",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Create a React App with ViteJS!",
   "main": "index.js",
   "author": "Nazmi Feeroz",
