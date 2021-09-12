@@ -38,8 +38,8 @@ const withTitle = (cli) => (0, figlet_1.default)("Vite React App", function (err
     }
     console.clear();
     console.log(data);
-    console.log((0, chalk_1.dim)("\nReact template configured with ViteJS, Typescript, Eslint/Prettier and React Testing Library."));
-    console.log((0, chalk_1.dim)("Template can be found at https://github.com/nazmifeeroz/vite-reactts-eslint-prettier\n"));
+    console.log((0, chalk_1.dim)(`\nReact template configured with ${chalk_1.underline.bgBlueBright.black("ViteJS")}, ${chalk_1.underline.bgCyan.black("Typescript")}, ${chalk_1.underline.bgYellow.black("Eslint/Prettier")} and ${chalk_1.underline.bgRed.white("React Testing Library")}.`));
+    console.log((0, chalk_1.dim)(`Template can be found at ${chalk_1.underline.green("https://github.com/nazmifeeroz/vite-reactts-eslint-prettier")}\n`));
     cli();
 });
 const QUESTIONS = [
@@ -116,10 +116,15 @@ function postProcess(options) {
         shell.cd(options.tartgetPath);
         const installCommand = `${options.packageManagerChoice} ${options.packageManagerChoice === "npm" ? "install" : ""}`;
         console.log((0, chalk_1.dim)(`\nRunning ${installCommand}...`));
-        const result = shell.exec(installCommand, { silent: false });
-        if (result.code !== 0) {
-            return false;
-        }
+        shell.exec(installCommand, () => {
+            console.log(chalk_1.underline.bgMagenta.white("\nNew project created successfully!"));
+            console.log((0, chalk_1.dim)("\n\nChange directory into your project folder:"));
+            console.log((0, chalk_1.yellow)(`  cd ${options.projectName}`));
+            const runAppCommand = `${options.packageManagerChoice} ${options.packageManagerChoice === "npm" ? "run" : ""} dev`;
+            console.log((0, chalk_1.dim)("\nRun app:"));
+            console.log((0, chalk_1.yellow)(`  ${runAppCommand}`));
+            console.log((0, chalk_1.green)("\nEnjoy!\n"));
+        });
     }
     return true;
 }

@@ -3,7 +3,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import * as inquirer from "inquirer";
-import { red, dim } from "chalk";
+import { underline, red, dim, green, yellow } from "chalk";
 import * as shell from "shelljs";
 import figlet from "figlet";
 import * as template from "./utils/template";
@@ -19,12 +19,18 @@ const withTitle = (cli: () => {}) =>
     console.log(data);
     console.log(
       dim(
-        "\nReact template configured with ViteJS, Typescript, Eslint/Prettier and React Testing Library."
+        `\nReact template configured with ${underline.bgBlueBright.black(
+          "ViteJS"
+        )}, ${underline.bgCyan.black("Typescript")}, ${underline.bgYellow.black(
+          "Eslint/Prettier"
+        )} and ${underline.bgRed.black("React Testing Library")}.`
       )
     );
     console.log(
       dim(
-        "Template can be found at https://github.com/nazmifeeroz/vite-reactts-eslint-prettier\n"
+        `Template can be found at ${underline.green(
+          "https://github.com/nazmifeeroz/vite-reactts-eslint-prettier"
+        )}\n`
       )
     );
 
@@ -136,10 +142,22 @@ function postProcess(options: CliOptions) {
 
     console.log(dim(`\nRunning ${installCommand}...`));
 
-    const result = shell.exec(installCommand, { silent: false });
-    if (result.code !== 0) {
-      return false;
-    }
+    shell.exec(installCommand, () => {
+      console.log(
+        underline.bgMagenta.white("\nNew project created successfully!")
+      );
+
+      console.log(dim("\n\nChange directory into your project folder:"));
+      console.log(yellow(`  cd ${options.projectName}`));
+
+      const runAppCommand = `${options.packageManagerChoice} ${
+        options.packageManagerChoice === "npm" ? "run" : ""
+      } dev`;
+      console.log(dim("\nRun app:"));
+      console.log(yellow(`  ${runAppCommand}`));
+
+      console.log(green("\nEnjoy!\n"));
+    });
   }
 
   return true;
