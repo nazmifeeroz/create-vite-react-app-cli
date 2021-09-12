@@ -1,0 +1,38 @@
+{
+  "name": "create-vite-react-app",
+  "version": "0.1.0",
+  "description": "Create a React App with ViteJS!",
+  "main": "index.js",
+  "author": "Nazmi Feeroz",
+  "license": "MIT",
+  "bin": {
+    "create-vite-react-app": "./dist/index.js"
+  },
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "build": "tsc && shx rm -rf dist/templates && git clone https://github.com/nazmifeeroz/vite-reactts-eslint-prettier dist/templates/react-template && shx rm -rf dist/templates/react-template/.git"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nazmifeeroz/create-vite-react-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nazmifeeroz/create-vite-react-app/issues"
+  },
+  "homepage": "https://github.com/nazmifeeroz/create-vite-react-app#readme",
+  "devDependencies": {
+    "@types/ejs": "^3.1.0",
+    "@types/inquirer": "^8.1.1",
+    "@types/node": "^16.9.1",
+    "@types/shelljs": "^0.8.9",
+    "shx": "^0.3.3",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "ejs": "^3.1.6",
+    "inquirer": "^8.1.2",
+    "shelljs": "^0.8.4"
+  }
+}
