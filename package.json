@@ -6,8 +6,8 @@
   "author": "Nazmi Feeroz",
   "license": "MIT",
   "bin": {
-    "create-vite-react-app": "./dist/index.js",
-    "create-vra": "./dist/index.js"
+    "create-vite-react": "./dist/index.js",
+    "cvr": "./dist/index.js"
   },
   "scripts": {
     "start": "ts-node src/index.ts",
