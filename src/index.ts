@@ -14,7 +14,7 @@ const QUESTIONS = [
     message: "Please input a new project name:",
   },
   {
-    name: "packageManager",
+    name: "packageManagerChoice",
     type: "list",
     message: "Which package manager do you wish to use:",
     choices: ["yarn", "npm"],
@@ -104,11 +104,10 @@ function postProcess(options: CliOptions) {
   const isNode = fs.existsSync(path.join(options.templatePath, "package.json"));
   if (isNode) {
     shell.cd(options.tartgetPath);
-    const result = shell.exec(
-      `${options.packageManagerChoice} ${
-        options.packageManagerChoice === "npm" ? "install" : ""
-      }`
-    );
+    const installCommand = `${options.packageManagerChoice} ${
+      options.packageManagerChoice === "npm" ? "install" : ""
+    }`;
+    const result = shell.exec(installCommand, { silent: false });
     if (result.code !== 0) {
       return false;
     }
