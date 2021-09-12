@@ -1,3 +1,5 @@
+![image](http://g.recordit.co/LYMUE8KYHz.gif)
+
 # Create React App with ViteJS
 
 This CLI creates a new React project that uses ViteJS as the bundler and development.
