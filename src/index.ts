@@ -17,6 +17,7 @@ const withTitle = (cli: () => {}) =>
     }
     console.clear();
     console.log(data);
+    console.log("v0.6.2");
     console.log(
       dim(
         `\nReact template configured with ${underline.bgBlueBright.black(

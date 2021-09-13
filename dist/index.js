@@ -38,7 +38,8 @@ const withTitle = (cli) => (0, figlet_1.default)("Vite React App", function (err
     }
     console.clear();
     console.log(data);
-    console.log((0, chalk_1.dim)(`\nReact template configured with ${chalk_1.underline.bgBlueBright.black("ViteJS")}, ${chalk_1.underline.bgCyan.black("Typescript")}, ${chalk_1.underline.bgYellow.black("Eslint/Prettier")} and ${chalk_1.underline.bgRed.white("React Testing Library")}.`));
+    console.log("v0.6.2");
+    console.log((0, chalk_1.dim)(`\nReact template configured with ${chalk_1.underline.bgBlueBright.black("ViteJS")}, ${chalk_1.underline.bgCyan.black("Typescript")}, ${chalk_1.underline.bgYellow.black("Eslint/Prettier")} and ${chalk_1.underline.bgRed.black("React Testing Library")}.`));
     console.log((0, chalk_1.dim)(`Template can be found at ${chalk_1.underline.green("https://github.com/nazmifeeroz/vite-reactts-eslint-prettier")}\n`));
     cli();
 });
