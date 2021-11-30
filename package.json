@@ -1,6 +1,6 @@
 {
   "name": "create-vite-react",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "description": "Create a React App with ViteJS!",
   "main": "index.js",
   "author": "Nazmi Feeroz",
@@ -37,5 +37,14 @@
     "figlet": "^1.5.2",
     "inquirer": "^8.1.2",
     "shelljs": "^0.8.4"
-  }
+  },
+  "keywords": [
+    "react",
+    "cli",
+    "vite",
+    "react testing library",
+    "typescript",
+    "eslint",
+    "prettier"
+  ]
 }
