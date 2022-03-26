@@ -3,7 +3,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import * as inquirer from "inquirer";
-import { underline, red, dim, green, yellow } from "chalk";
+import chalk from "chalk";
 import * as shell from "shelljs";
 import figlet from "figlet";
 import * as template from "./utils/template";
@@ -19,17 +19,19 @@ const withTitle = (cli: () => {}) =>
     console.log(data);
     console.log("v0.6.5");
     console.log(
-      dim(
-        `\nReact template configured with ${underline.bgBlueBright.black(
+      chalk.dim(
+        `\nReact template configured with ${chalk.underline.bgBlueBright.black(
           "ViteJS"
-        )}, ${underline.bgCyan.black("Typescript")}, ${underline.bgYellow.black(
+        )}, ${chalk.underline.bgCyan.black(
+          "Typescript"
+        )}, ${chalk.underline.bgYellow.black(
           "Eslint/Prettier"
-        )} and ${underline.bgRed.black("React Testing Library")}.`
+        )} and ${chalk.underline.bgRed.black("React Testing Library")}.`
       )
     );
     console.log(
-      dim(
-        `Template can be found at ${underline.green(
+      chalk.dim(
+        `Template can be found at ${chalk.underline.green(
           "https://github.com/nazmifeeroz/vite-reactts-eslint-prettier"
         )}\n`
       )
@@ -90,7 +92,7 @@ withTitle(() =>
 function createProject(projectPath: string) {
   if (fs.existsSync(projectPath)) {
     console.log(
-      red(`Folder ${projectPath} exists. Delete or use another name.`)
+      chalk.red(`Folder ${projectPath} exists. Delete or use another name.`)
     );
     return false;
   }
@@ -141,23 +143,23 @@ function postProcess(options: CliOptions) {
       options.packageManagerChoice === "npm" ? "install" : ""
     }`;
 
-    console.log(dim(`\nRunning ${installCommand}...`));
+    console.log(chalk.dim(`\nRunning ${installCommand}...`));
 
     shell.exec(installCommand, () => {
       console.log(
-        underline.bgMagenta.white("\nNew project created successfully!")
+        chalk.underline.bgMagenta.white("\nNew project created successfully!")
       );
 
-      console.log(dim("\n\nChange directory into your project folder:"));
-      console.log(yellow(`  cd ${options.projectName}`));
+      console.log(chalk.dim("\n\nChange directory into your project folder:"));
+      console.log(chalk.yellow(`  cd ${options.projectName}`));
 
       const runAppCommand = `${options.packageManagerChoice} ${
         options.packageManagerChoice === "npm" ? "run" : ""
       } dev`;
-      console.log(dim("\nRun app:"));
-      console.log(yellow(`  ${runAppCommand}`));
+      console.log(chalk.dim("\nRun app:"));
+      console.log(chalk.yellow(`  ${runAppCommand}`));
 
-      console.log(green("\nEnjoy!\n"));
+      console.log(chalk.green("\nEnjoy!\n"));
     });
   }
 

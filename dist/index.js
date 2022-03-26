@@ -2,7 +2,11 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -26,7 +30,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs = __importStar(require("fs"));
 const path = __importStar(require("path"));
 const inquirer = __importStar(require("inquirer"));
-const chalk_1 = require("chalk");
+const chalk_1 = __importDefault(require("chalk"));
 const shell = __importStar(require("shelljs"));
 const figlet_1 = __importDefault(require("figlet"));
 const template = __importStar(require("./utils/template"));
@@ -38,9 +42,9 @@ const withTitle = (cli) => (0, figlet_1.default)("Vite React App", function (err
     }
     console.clear();
     console.log(data);
-    console.log("v0.6.4");
-    console.log((0, chalk_1.dim)(`\nReact template configured with ${chalk_1.underline.bgBlueBright.black("ViteJS")}, ${chalk_1.underline.bgCyan.black("Typescript")}, ${chalk_1.underline.bgYellow.black("Eslint/Prettier")} and ${chalk_1.underline.bgRed.black("React Testing Library")}.`));
-    console.log((0, chalk_1.dim)(`Template can be found at ${chalk_1.underline.green("https://github.com/nazmifeeroz/vite-reactts-eslint-prettier")}\n`));
+    console.log("v0.6.5");
+    console.log(chalk_1.default.dim(`\nReact template configured with ${chalk_1.default.underline.bgBlueBright.black("ViteJS")}, ${chalk_1.default.underline.bgCyan.black("Typescript")}, ${chalk_1.default.underline.bgYellow.black("Eslint/Prettier")} and ${chalk_1.default.underline.bgRed.black("React Testing Library")}.`));
+    console.log(chalk_1.default.dim(`Template can be found at ${chalk_1.default.underline.green("https://github.com/nazmifeeroz/vite-reactts-eslint-prettier")}\n`));
     cli();
 });
 const QUESTIONS = [
@@ -77,7 +81,7 @@ withTitle(() => inquirer.prompt(QUESTIONS).then((answers) => {
 }));
 function createProject(projectPath) {
     if (fs.existsSync(projectPath)) {
-        console.log((0, chalk_1.red)(`Folder ${projectPath} exists. Delete or use another name.`));
+        console.log(chalk_1.default.red(`Folder ${projectPath} exists. Delete or use another name.`));
         return false;
     }
     fs.mkdirSync(projectPath);
@@ -116,15 +120,15 @@ function postProcess(options) {
     if (isNode) {
         shell.cd(options.tartgetPath);
         const installCommand = `${options.packageManagerChoice} ${options.packageManagerChoice === "npm" ? "install" : ""}`;
-        console.log((0, chalk_1.dim)(`\nRunning ${installCommand}...`));
+        console.log(chalk_1.default.dim(`\nRunning ${installCommand}...`));
         shell.exec(installCommand, () => {
-            console.log(chalk_1.underline.bgMagenta.white("\nNew project created successfully!"));
-            console.log((0, chalk_1.dim)("\n\nChange directory into your project folder:"));
-            console.log((0, chalk_1.yellow)(`  cd ${options.projectName}`));
+            console.log(chalk_1.default.underline.bgMagenta.white("\nNew project created successfully!"));
+            console.log(chalk_1.default.dim("\n\nChange directory into your project folder:"));
+            console.log(chalk_1.default.yellow(`  cd ${options.projectName}`));
             const runAppCommand = `${options.packageManagerChoice} ${options.packageManagerChoice === "npm" ? "run" : ""} dev`;
-            console.log((0, chalk_1.dim)("\nRun app:"));
-            console.log((0, chalk_1.yellow)(`  ${runAppCommand}`));
-            console.log((0, chalk_1.green)("\nEnjoy!\n"));
+            console.log(chalk_1.default.dim("\nRun app:"));
+            console.log(chalk_1.default.yellow(`  ${runAppCommand}`));
+            console.log(chalk_1.default.green("\nEnjoy!\n"));
         });
     }
     return true;
